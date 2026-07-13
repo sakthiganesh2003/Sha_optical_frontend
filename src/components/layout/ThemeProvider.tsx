@@ -5,7 +5,7 @@ import * as React from 'react';
 type Theme = 'light' | 'dark';
 
 const Ctx = React.createContext<{ theme: Theme; toggle: () => void }>({
-  theme: 'dark',
+  theme: 'light',
   toggle: () => {},
 });
 
@@ -16,12 +16,12 @@ export function ThemeProvider({
   children: React.ReactNode;
   storageKey?: string;
 }) {
-  const [theme, setTheme] = React.useState<Theme>('dark');
+  const [theme, setTheme] = React.useState<Theme>('light');
 
   // Hydrate from localStorage
   React.useEffect(() => {
     const stored = localStorage.getItem(storageKey) as Theme | null;
-    const resolved: Theme = stored === 'light' ? 'light' : 'dark';
+    const resolved: Theme = stored === 'dark' ? 'dark' : 'light';
     setTheme(resolved);
   }, [storageKey]);
 
