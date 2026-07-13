@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+/* ── Spin animation (used by loading spinners) ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --bg-base:        #f8f9ff;
+  --bg-surface:     #ffffff;
+  --bg-muted:       #f1f3fa;
+  --border:         #e2e6f0;
+  --text-primary:   #0f1628;
+  --text-secondary: #5a6478;
+  --text-muted:     #9aa5bc;
+  --accent:         #6366f1;
+  --accent-hover:   #4f46e5;
+  --accent-soft:    #eef2ff;
+  --success:        #10b981;
+  --warning:        #f59e0b;
+  --danger:         #ef4444;
+  --sidebar-w:      260px;
+  --sidebar-w-collapsed: 72px;
+  --radius:         12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+}
+
+.dark {
+  --bg-base:        #0c0f1d;
+  --bg-surface:     #131929;
+  --bg-muted:       #1a2035;
+  --border:         #252d45;
+  --text-primary:   #e8ecf8;
+  --text-secondary: #8892ad;
+  --text-muted:     #4d5a78;
+  --accent:         #818cf8;
+  --accent-hover:   #6366f1;
+  --accent-soft:    #1e2346;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.4);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.5);
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { height: 100%; }
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Utility Classes ────────────────────────────────────────── */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.glass {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.dark .glass {
+  background: rgba(19,25,41,0.75);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .5; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.animate-fade-up  { animation: fadeUp  0.4s cubic-bezier(.16,1,.3,1) both; }
+.animate-fade-in  { animation: fadeIn  0.3s ease both; }
+.animate-scale-in { animation: scaleIn 0.25s cubic-bezier(.16,1,.3,1) both; }
+
+/* staggered children */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
+
+/* skeleton shimmer */
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--bg-muted) 25%,
+    var(--border)   50%,
+    var(--bg-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 8px;
+}
+
+/* status badge colours */
+.badge-new        { background:#dbeafe; color:#1d4ed8; }
+.badge-processing { background:#fef3c7; color:#b45309; }
+.badge-ready      { background:#ede9fe; color:#6d28d9; }
+.badge-delivered  { background:#d1fae5; color:#065f46; }
+.badge-cancelled  { background:#fee2e2; color:#b91c1c; }
+
+.dark .badge-new        { background:#1e3a5f; color:#93c5fd; }
+.dark .badge-processing { background:#3d2f0a; color:#fcd34d; }
+.dark .badge-ready      { background:#2e1e5f; color:#c4b5fd; }
+.dark .badge-delivered  { background:#0d3325; color:#6ee7b7; }
+.dark .badge-cancelled  { background:#3d1010; color:#fca5a5; }
