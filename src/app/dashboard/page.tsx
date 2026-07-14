@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import { Users, UserPlus, Clock, CheckCircle, Truck, Eye, ArrowRight, TrendingUp } from 'lucide-react';
+import { Users, UserPlus, Clock, CheckCircle, Truck, Eye, ArrowRight, TrendingUp, RefreshCw } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 import { dashboardService } from '@/lib/api';
 import { Order } from '@/lib/types';
@@ -69,7 +69,7 @@ function SkeletonCard() {
 export default function DashboardPage() {
   const [range, setRange] = React.useState('all');
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch, isFetching } = useQuery({
     queryKey: ['dashboardStats', range],
     queryFn: () => dashboardService.getStats(range),
     refetchInterval: 30000,
@@ -128,7 +128,28 @@ export default function DashboardPage() {
               Here is what is happening in your optical shop today.
             </p>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            {/* Refresh button */}
+            <button
+              onClick={() => refetch()}
+              disabled={isFetching}
+              style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: 36, height: 36, borderRadius: 8,
+                background: 'var(--bg-surface)', border: '1px solid var(--border)',
+                color: 'var(--text-secondary)', cursor: 'pointer', transition: 'all 0.15s',
+              }}
+              onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--accent)'; el.style.color = 'var(--accent)'; }}
+              onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.color = 'var(--text-secondary)'; }}
+            >
+              <RefreshCw
+                size={14}
+                style={{
+                  animation: isFetching ? 'spin 1s linear infinite' : 'none',
+                }}
+              />
+            </button>
+
             {/* Range filter select */}
             <select
               value={range}
