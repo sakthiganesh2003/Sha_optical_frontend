@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OptiShop Admin - Optical Shop Management Panel",
+  title: "Sha Optical Admin ",
   description: "Secure administrative dashboard for managing customers, prescriptions, orders, and shop history.",
 };
 

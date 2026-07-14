@@ -160,7 +160,7 @@ export default function Sidebar({
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               boxShadow: '0 4px 12px rgba(99,102,241,0.3)',
             }}>
-              <Glasses size={20} color="white" />
+              <Glasses size={20} color="white" style={{ display: 'block' }} />
             </div>
             {!(collapsed && isDesktop) && (
               <div style={{ minWidth: 0 }}>

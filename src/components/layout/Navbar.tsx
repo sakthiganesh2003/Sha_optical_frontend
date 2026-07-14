@@ -71,8 +71,12 @@ export default function Navbar({ setMobileOpen, isDesktop }: NavbarProps) {
         {/* Mobile logo */}
         {!isDesktop && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Glasses size={14} color="white" />
+            <div style={{
+              width: 26, height: 26, borderRadius: 7,
+              background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center'
+            }}>
+              <Glasses size={14} color="white" style={{ display: 'block' }} />
             </div>
             <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>Sha optical</span>
           </div>
