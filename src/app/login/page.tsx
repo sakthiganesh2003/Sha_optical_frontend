@@ -168,7 +168,7 @@ export default function LoginPage() {
                   <User2 size={16} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.25)', pointerEvents: 'none' }} />
                   <input
                     type="text"
-                    placeholder="admin"
+                    placeholder="shaoptical@gmail.com"
                     autoComplete="username"
                     {...register('username')}
                     style={{
@@ -255,7 +255,7 @@ export default function LoginPage() {
           </div>
 
           <p style={{ textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.2)', marginTop: 24 }}>
-            OptiShop Admin Panel &copy; 2026
+            Sha Optical Admin Panel &copy; 2026
           </p>
         </div>
       </div>
